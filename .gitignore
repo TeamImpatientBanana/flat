@@ -60,4 +60,4 @@ server/npm-debug.log
 *.odt#
 
 # Uploads folder
-public/uploads/*.html
+/server/public/uploads/*.html
