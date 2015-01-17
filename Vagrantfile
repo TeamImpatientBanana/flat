@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # configurating the vm 
   config.vm.provider "virtualbox" do |v|
-    v.name = "crowdcalendar"
+    v.name = "flat"
     # max 75% CPU cap
     v.customize ["modifyvm", :id, "--cpuexecutioncap", "75"]
     # 2GB ram
