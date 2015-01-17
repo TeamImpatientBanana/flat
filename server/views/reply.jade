@@ -1,0 +1,31 @@
+//
+   Created by Andrew on 1/17/2015.
+
+// Begin comment button
+.container-fluid.text-center
+   button.btn.btn-primary(type="button")
+      | Comment
+      .container-fluid.text-center.commentform
+   form
+      .form-group
+         label.hidden(for="currentThread")
+         input(id="currentThread", value=$currentThread)
+      .form-group
+         label.sr-only(for="comment")
+         textarea(id="comment")
+      .form-group
+         label.sr-only(for="name")
+         input.form-control(id="name", placeholder="Name, optional")
+      button.btn.btn-default(type=submit)
+         | Submit
+// End comment button
+
+// Begin thread content
+.container-fluid
+   .container-fluid
+      | $postnumber $Name $file
+      p $comment
+   .container-fluid
+      | $postnumber $Name
+      p $comment
+// End thread content

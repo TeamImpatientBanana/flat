@@ -2,3 +2,78 @@ extends layout
 
 block content
 
+    // Begin post button
+    .container-fluid.text-center.postbutton
+        button.btn.btn-primary(type="button")
+            | Post
+            .container-fluid.text-center.postform
+        form
+            .form-group
+                label.sr-only(for="subject")
+                input.form-control(id="subject", placeholder="Subject")
+            .form-group
+                label.sr-only(for="file")
+                input(type="file", id="file")
+            .form-group
+                label.sr-only(for="comment")
+                textarea(id="comment")
+            .form-group
+                .radio
+                    label.sr-only(for="game")
+                        input(type="radio", name="type", value="game")
+                        | Game
+                .radio
+                    label.sr-only(for="video")
+                        input(type="radio", name="type", value="video")
+                        | Video
+                .radio
+                    label.sr-only(for="loop")
+                        input(type="radio", name="type", value="loop")
+                        | Loop
+                .form-group
+                    label.sr-only(for="name")
+                    input.form-control(id="name", placeholder="Name, optional")
+            button.btn.btn-default(type=submit)
+                | Submit
+    // End post button
+
+    // Begin board content
+    .container-fluid.text-center
+        table.table.table-striped
+            thead
+                tr
+                    th
+                        | No.
+                    th
+                        | Name
+                    th
+                        | File
+                    th
+                        | Type
+                    th
+                        | Subject
+                    th
+                        | Size
+                    th
+                        | Date
+                    th
+                        | Replies
+            tbody
+                tr
+                    td
+                        | No.
+                    td
+                        | Name
+                    td
+                        | File
+                    td
+                        | Type
+                    td
+                        | Subject
+                    td
+                        | Size
+                    td
+                        | Date
+                    td
+                        | Replies
+    // End board content
