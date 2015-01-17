@@ -13,7 +13,6 @@ var errorHandler = require('errorhandler');
 var csrf = require('lusca').csrf();
 var methodOverride = require('method-override');
 var multipart = require('connect-multiparty');
-var multipartMiddleware = multipart();
 
 
 var _ = require('lodash');
@@ -50,23 +49,18 @@ var app = express();
 /**
  * Connect to MongoDB.
  */
-/*
-mongoose.connect('mongodb://localhost/test');
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function (callback) {
-  // yay!
-});
-*/
 
-app.set('dburi', 'mongodb://localhost/test');
+mongoose.connect(secrets.db);
+mongoose.connection.on('error', function() {
+  console.error('MongoDB Connection Error. Make sure MongoDB is running.');
+});
 
 
 /**
  * CSRF whitelist.
  */
 
-var csrfExclude = ['/url1', '/upload'];
+var csrfExclude = ['/reply', '/upload'];
 
 
 /**
@@ -84,7 +78,7 @@ app.use(connectAssets({
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(multipart({ uploadDir: "./public/uploads" }));
+app.use(multipart());
 app.use(expressValidator());
 app.use(methodOverride());
 app.use(cookieParser());
@@ -145,9 +139,5 @@ app.use(errorHandler());
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
 });
-
-console.log(__dirname);
-
-global.db = (global.db ? global.db : mongoose.createConnection(app.settings.dburi));
 
 module.exports = app;

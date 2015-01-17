@@ -7,7 +7,10 @@ block content
     p
       button.btn.btn-primary(type="button", id="button")
         | Post
-    
+
+  // Validation error message partial
+  include partials/messages
+
   .container-fluid.text-center(id="form")
     p
       form(action="/upload", method="post", enctype="multipart/form-data")

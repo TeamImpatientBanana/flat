@@ -10,7 +10,6 @@ function subjectValidator(v) {
     return v.length < 64;
 }
 
-
 // Define schema
 var Replies = new Schema({
     replyNumber : Number,
@@ -22,7 +21,8 @@ var PostSchema = new Schema({
         type: String,
         required: true
     },
-    filePath : String,
+    comment : String,
+    fileName : String,
     tag : {
         type: String,
         enum: ['video', 'game', 'loop'],
@@ -38,6 +38,6 @@ var PostSchema = new Schema({
         default: Date.now
     }
 
-});
-
+}, {collection: 'posts'});
+// Third argument in the collection name
 module.exports = mongoose.model('Index', PostSchema);
