@@ -37,8 +37,6 @@ var contactController = require('./controllers/contact');
  */
 
 var secrets = require('./config/secrets');
-var passportConf = require('./config/passport');
-
 
 /**
  * Create Express server.
