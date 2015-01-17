@@ -1,8 +1,9 @@
 /**
  * Created by Andrew on 1/17/2015.
  */
+
 var mongoose = require('mongoose')
-    , Schema = mongoose.Schema;
+  , Schema = mongoose.Schema;
 
 
 function subjectValidator(v) {
