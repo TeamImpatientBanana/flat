@@ -4,30 +4,32 @@ block content
 
     // Begin comment button
     .container-fluid.text-center(id="buttonContainer")
-      button.btn.btn-primary(type="button", id="button")
-        | Comment
+      p
+        button.btn.btn-primary(type="button", id="button")
+          | Comment
 
     .container-fluid.text-center(id="form")
-      form
-        .form-group
-          label.hidden(for="currentThread")
-          input(id="currentThread", name="currentThread", value=$currentThread)
-        .form-group
-          label.sr-only(for="comment")
-          textarea(id="comment", name="comment", required)
-        .form-group
-          label.sr-only(for="name")
-          input.form-control(id="name", name="name", placeholder="Name, optional")
-        button.btn.btn-default(type=submit)
-          | Submit
+      p
+        form
+          .form-group.displaynone
+            label(for="currentThread")
+            input(id="currentThread", name="currentThread", value=$currentThread)
+          .form-group
+            label.sr-only(for="comment")
+            textarea.form-control(id="comment", name="comment", placeholder="Comment", required)
+          .form-group
+            label.sr-only(for="name")
+            input.form-control(id="name", name="name", placeholder="Name, optional")
+          button.btn.btn-default(type=submit)
+            | Submit
     // End comment button
 
     // Begin thread content
     .container-fluid
-       .container-fluid
-          | $postnumber $Name $file
+       .container-fluid.OPReply
+          b $postnumber $Name $file
           p $comment
-       .container-fluid
-          | $postnumber $Name
+       .container-fluid.reply
+          b $postnumber $Name
           p $comment
     // End thread content

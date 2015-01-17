@@ -4,38 +4,40 @@ block content
 
   // Begin post button
   .container-fluid.text-center(id="buttonContainer")
-    button.btn.btn-primary(type="button", id="button")
-      | Post
+    p
+      button.btn.btn-primary(type="button", id="button")
+        | Post
     
   .container-fluid.text-center(id="form")
-    form(action="/upload", method="post")
-      .form-group
-        label.sr-only(for="subject")
-        input.form-control(id="subject", name="subject", placeholder="Subject")
-      .form-group
-        label.sr-only(for="file")
-        input.text-center.center-input(type="file", name="file", id="file", required)
-      .form-group
-        label.sr-only(for="comment")
-        textarea(id="comment", name="comment")
-      .form-group
-        .radio
-          label.sr-only(for="game")
-          input(type="radio", name="tag", value="game", checked)
-          | Game
-        .radio
-          label.sr-only(for="video")
-          input(type="radio", name="tag", value="video")
-          | Video
-        .radio
-          label.sr-only(for="loop")
-          input(type="radio", name="tag", value="loop")
-          | Loop
-      .form-group
-        label.sr-only(for="name")
-        input.form-control(id="name", name="name", placeholder="Name, optional")
-      button.btn.btn-default(type="submit")
-        | Submit
+    p
+      form(action="/upload", method="post")
+        .form-group
+          label.sr-only(for="subject")
+          input.form-control(id="subject", name="subject", placeholder="Subject")
+        .form-group
+          label.sr-only(for="file")
+          input.text-center.center-input(type="file", name="file", id="file", required)
+        .form-group
+          label.sr-only(for="comment")
+          textarea.form-control(id="comment", name="comment", placeholder="Comment")
+        .form-group
+          .radio
+            label.sr-only(for="game")
+            input(type="radio", name="tag", value="game", checked)
+            | Game
+          .radio
+            label.sr-only(for="video")
+            input(type="radio", name="tag", value="video")
+            | Video
+          .radio
+            label.sr-only(for="loop")
+            input(type="radio", name="tag", value="loop")
+            | Loop
+        .form-group
+          label.sr-only(for="name")
+          input.form-control(id="name", name="name", placeholder="Name, optional")
+        button.btn.btn-default(type="submit")
+          | Submit
   // End post button
 
   // Begin board content
