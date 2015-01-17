@@ -3,18 +3,18 @@ extends layout
 block content
 
   // Begin post button
-  .container-fluid.text-center.postbutton
-    button.btn.btn-primary(type="button")
+  .container-fluid.text-center(id="buttonContainer")
+    button.btn.btn-primary(type="button", id="button")
       | Post
     
-  .container-fluid.text-center.postform
+  .container-fluid.text-center(id="form")
     form
       .form-group
         label.sr-only(for="subject")
         input.form-control(id="subject", name="subject", placeholder="Subject")
       .form-group
         label.sr-only(for="file")
-        input(type="file", name="file", id="file", required)
+        input.text-center.center-input(type="file", name="file", id="file", required)
       .form-group
         label.sr-only(for="comment")
         textarea(id="comment", name="comment")
@@ -59,8 +59,8 @@ block content
             | Date
           th
             | Replies
-      tbody
-        tr
+      tbody.text-center
+        tr.text-center
           td
             | No.
           td

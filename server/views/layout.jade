@@ -14,16 +14,16 @@ html
 
     // Begin header
     .container-fluid.text-center
-      a(href='/')
-    img.img-responsive.text-center(src="flatlogo.png", alt="/f/lat logo")
-    h1.text-center /f/flatlogo
-    h2.text-center html5 message board
+      a(href='/').text-center
+        img.img-responsive(src="https://www.google.com/images/srpr/logo11w.png", alt="/f/lat logo")
+      h1.text-center /f/flat
+      h2.text-center html5 message board
     // End header
 
     block content
 
     // Begin footer
-    footer.footer
+    footer.footer.text-center
       .container-fluid
         p
           | Made at MHacks V Spring 2015
@@ -39,4 +39,5 @@ html
     // Begin Scripts
     script(src='/js/lib/jquery-2.1.1.min.js')
     script(src='/js/lib/bootstrap.min.js')
+    script(src='/js/main.js')
     block scripts

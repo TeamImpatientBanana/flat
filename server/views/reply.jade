@@ -1,20 +1,21 @@
 // Begin comment button
-.container-fluid.text-center
-  button.btn.btn-primary(type="button")
+.container-fluid.text-center(id="buttonContainer")
+  button.btn.btn-primary(type="button", id="button")
     | Comment
-    .container-fluid.text-center.commentform
-   form
-      .form-group
-        label.hidden(for="currentThread")
-        input(id="currentThread", name="currentThread", value=$currentThread)
-      .form-group
-        label.sr-only(for="comment")
-        textarea(id="comment", name="comment", required)
-      .form-group
-        label.sr-only(for="name")
-        input.form-control(id="name", name="name", placeholder="Name, optional")
-      button.btn.btn-default(type=submit)
-        | Submit
+
+.container-fluid.text-center(id="form")
+  form
+    .form-group
+      label.hidden(for="currentThread")
+      input(id="currentThread", name="currentThread", value=$currentThread)
+    .form-group
+      label.sr-only(for="comment")
+      textarea(id="comment", name="comment", required)
+    .form-group
+      label.sr-only(for="name")
+      input.form-control(id="name", name="name", placeholder="Name, optional")
+    button.btn.btn-default(type=submit)
+      | Submit
 // End comment button
 
 // Begin thread content
