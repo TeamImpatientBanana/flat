@@ -6,9 +6,9 @@ block content
   .container-fluid.text-center(id="buttonContainer")
     button.btn.btn-primary(type="button", id="button")
       | Post
-    
+
   .container-fluid.text-center(id="form")
-    form(action="/upload", method="post")
+    form(action="/upload", method="post", enctype="multipart/form-data")
       .form-group
         label.sr-only(for="subject")
         input.form-control(id="subject", name="subject", placeholder="Subject")

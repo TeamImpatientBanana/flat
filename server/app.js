@@ -12,6 +12,9 @@ var logger = require('morgan');
 var errorHandler = require('errorhandler');
 var csrf = require('lusca').csrf();
 var methodOverride = require('method-override');
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
+
 
 var _ = require('lodash');
 var MongoStore = require('connect-mongo')(session);
@@ -27,7 +30,7 @@ var connectAssets = require('connect-assets');
  */
 
 var indexController = require('./controllers/index');
-//var userController = require('./controllers/user');
+var uploadController = require('./controllers/upload');
 var contactController = require('./controllers/contact');
 
 
@@ -63,7 +66,7 @@ app.set('dburi', 'mongodb://localhost/test');
  * CSRF whitelist.
  */
 
-var csrfExclude = ['/url1', '/url2'];
+var csrfExclude = ['/url1', '/upload'];
 
 
 /**
@@ -81,6 +84,7 @@ app.use(connectAssets({
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(multipart({ uploadDir: "./public/uploads" }));
 app.use(expressValidator());
 app.use(methodOverride());
 app.use(cookieParser());
@@ -120,8 +124,8 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
  */
 
 app.get('/', indexController.index);
-app.post('/upload', indexController.postUpload);
-app.post('/reply', indexController.postReply);
+app.post('/upload', uploadController.postUpload);
+//app.post('/reply', indexController.postReply);
 app.get('/reply', indexController.getReply);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);

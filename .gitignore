@@ -58,3 +58,6 @@ test/coverage/
 server/npm-debug.log
 *.log
 *.odt#
+
+# Uploads folder
+public/uploads/*.html
