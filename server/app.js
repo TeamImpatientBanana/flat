@@ -47,13 +47,16 @@ var app = express();
 /**
  * Connect to MongoDB.
  */
-
+/*
 mongoose.connect('mongodb://localhost/test');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function (callback) {
   // yay!
 });
+*/
+
+app.set('dburi', 'mongodb://localhost/test');
 
 
 /**
@@ -119,6 +122,7 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
 app.get('/', indexController.index);
 app.post('/upload', indexController.postUpload);
 app.post('/reply', indexController.postReply);
+app.get('/reply', indexController.getReply);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 
@@ -137,5 +141,9 @@ app.use(errorHandler());
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
 });
+
+console.log(__dirname);
+
+global.db = (global.db ? global.db : mongoose.createConnection(app.settings.dburi));
 
 module.exports = app;

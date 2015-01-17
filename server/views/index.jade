@@ -8,7 +8,7 @@ block content
       | Post
     
   .container-fluid.text-center(id="form")
-    form
+    form(action="/upload", method="post")
       .form-group
         label.sr-only(for="subject")
         input.form-control(id="subject", name="subject", placeholder="Subject")
@@ -21,16 +21,16 @@ block content
       .form-group
         .radio
           label.sr-only(for="game")
-            input(type="radio", name="tag", value="game", checked)
-            | Game
+          input(type="radio", name="tag", value="game", checked)
+          | Game
         .radio
           label.sr-only(for="video")
-            input(type="radio", name="tag", value="video")
-            | Video
+          input(type="radio", name="tag", value="video")
+          | Video
         .radio
           label.sr-only(for="loop")
-            input(type="radio", name="tag", value="loop")
-            | Loop
+          input(type="radio", name="tag", value="loop")
+          | Loop
       .form-group
         label.sr-only(for="name")
         input.form-control(id="name", name="name", placeholder="Name, optional")
