@@ -11,17 +11,17 @@ block content
     form
       .form-group
         label.sr-only(for="subject")
-        input.form-control(id="subject", placeholder="Subject")
+        input.form-control(id="subject", name="subject", placeholder="Subject")
       .form-group
         label.sr-only(for="file")
-        input(type="file", id="file")
+        input(type="file", name="file", id="file", required)
       .form-group
         label.sr-only(for="comment")
-        textarea(id="comment")
+        textarea(id="comment", name="comment")
       .form-group
         .radio
           label.sr-only(for="game")
-            input(type="radio", name="tag", value="game")
+            input(type="radio", name="tag", value="game", checked)
             | Game
         .radio
           label.sr-only(for="video")
@@ -33,14 +33,14 @@ block content
             | Loop
       .form-group
         label.sr-only(for="name")
-        input.form-control(id="name", placeholder="Name, optional")
+        input.form-control(id="name", name="name", placeholder="Name, optional")
       button.btn.btn-default(type="submit")
         | Submit
   // End post button
 
   // Begin board content
   .container-fluid.text-center
-    table.table.table-striped
+    table.table.table-striped.text-center
       thead
         tr
           th
@@ -59,7 +59,7 @@ block content
             | Date
           th
             | Replies
-    tbody
+      tbody
         tr
           td
             | No.

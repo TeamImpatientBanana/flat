@@ -8,106 +8,17 @@ body {
 
 /* Font control
 -------------------------------------------------- */
-body, .navbar {
+body {
     font-family: 'Exo 2', sans-serif;
     length: 100%;
 }
 /*-------------------------------------------------- */
 
 
-/* Header image size and margin control
+/* Styles the textarea
 -------------------------------------------------- */
-.homepage-logo {
-    font-size: 200px;
-}
-.homediv {
-    margin: 10px;
-}
-@media (min-width: 768px) {
-    .homepage-logo {
-        font-size: 250px;
-    }
-    .homediv {
-        margin: 10px;
-    }
-}
-@media (min-width: 992px) {
-    .homepage-logo {
-        font-size: 300px;
-    }
-    .homediv {
-        margin: 15px;
-    }
-}
-@media (min-width: 1200px) {
-    .homepage-logo {
-        font-size: 350px;
-    }
-    .homediv {
-        margin: 20px;
-    }
-}
-/*-------------------------------------------------- */
-
-
-/* Cleans up .navbar-form's margin
-   then makes it so it doesn't change
-   between large and small screens
-   as Bootstrap wants it to
--------------------------------------------------- */
-.navbar-form {
-    margin: 0px 0px 0px 0px;
-    border:none;
-}
-@media (min-width: 768px) {
-    .navbar-form {
-        padding: 10px 15px 10px 15px;
-    }
-}
-/*-------------------------------------------------- */
-
-
-/* Makes it so that the mobile navbar toggle
-   button doesn't disappear on large screens
-   because we are using it for the advanced search
--------------------------------------------------- */
-@media (min-width: 768px) {
-    .navbar-header {
-        float: none;
-    }
-    .navbar-toggle {
-        display: block;
-    }
-    .navbar-collapse.collapse {
-        display: none !important;
-    }
-}
-/*-------------------------------------------------- */
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-    position: relative;
-    min-height: 100%;
-}
-body {
-    /* Margin bottom by footer height */
-    margin-bottom: 30px;
-}
-.footer {
-    position: absolute;
-    bottom: 0;
+textarea{
     width: 100%;
-    min-width: 400px;
-    /* Set the fixed height of the footer here */
-    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
-/* -------------------------------------------------- */
-
-
-/* stops the mobile navbar from collapsing when the resolution is higher than sm
--------------------------------------------------- */
-.collapse.in{
-    display:block !important;
-}
-/* -------------------------------------------------- */

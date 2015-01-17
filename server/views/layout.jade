@@ -8,16 +8,16 @@ html
     link(href='/css/lib/fonts.css', rel='stylesheet')
     link(href='/css/style.css', rel='stylesheet')
     block head
-    title= title
+    title = title
 
   body
 
     // Begin header
     .container-fluid.text-center
       a(href='/')
-    img.img-responsive(src="flatlogo.png", alt="/f/lat logo")
-    h1 /f/flatlogo
-    h2 html5 message board
+    img.img-responsive.text-center(src="flatlogo.png", alt="/f/lat logo")
+    h1.text-center /f/flatlogo
+    h2.text-center html5 message board
     // End header
 
     block content
@@ -25,16 +25,15 @@ html
     // Begin footer
     footer.footer
       .container-fluid
-        p.pull-left
+        p
           | Made at MHacks V Spring 2015
-          ul.pull-right.list-inline
-            li
-              | 2015
-              a(href="http://impatientbanana.com/")
-                | Team Impatient Banana
-            li
-              a(href="https://github.com/TeamImpatientBanana/flat")
-                | Fork this on GitHub
+        p
+          | 2015 
+          a(href="http://impatientbanana.com/")
+            | Team Impatient Banana
+        p
+          a(href="https://github.com/TeamImpatientBanana/flat")
+            | Fork this on GitHub
     // End footer
 
     // Begin Scripts

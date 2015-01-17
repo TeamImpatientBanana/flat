@@ -6,13 +6,13 @@
    form
       .form-group
         label.hidden(for="currentThread")
-        input(id="currentThread", value=$currentThread)
+        input(id="currentThread", name="currentThread", value=$currentThread)
       .form-group
         label.sr-only(for="comment")
-        textarea(id="comment")
+        textarea(id="comment", name="comment", required)
       .form-group
         label.sr-only(for="name")
-        input.form-control(id="name", placeholder="Name, optional")
+        input.form-control(id="name", name="name", placeholder="Name, optional")
       button.btn.btn-default(type=submit)
         | Submit
 // End comment button
