@@ -3,10 +3,12 @@
  */
 var bodyParser = require('body-parser');
 var Post = require('../models/Posts');
-var Reply = require('../models/Replies');
 var mongoose = require('mongoose');
 var fs = require('fs');
 var validator = require('express-validator');
+
+
+
 
 
 exports.getReply = function(req, res) {
@@ -14,25 +16,27 @@ exports.getReply = function(req, res) {
   var postId = req.params.id;
 
   Post
-    .findOne({_id: postId})
-    .sort('datePosted')
-    .select('_id name comment fileName _replies')
-    .populate('_replies', 'name comment dateReplied')
-    .exec(function(err, data){
+    .findById(postId)
+    .sort({'replies.$.dateReplied':1})
+    .exec(function(err, postData){
       if (err) console.log(err);
-      console.log(data);
+      console.log("Reply data: ");
+      console.log(postData);
+
+      res.render('reply', {
+        title: 'Reply',
+        postData: postData
+      });
     });
 
-
-  res.render('reply', {
-    title: 'Reply'
-  });
 };
 
-exports.postReply = function(req, res, next) {
+exports.postReply = function(req, res) {
 
   var comment = req.body.comment;
   var name = req.body.name;
+  var postId = req.body.postId;
+
 
   // validate the inputs
   req.assert('name', 'That name is too long.').len(0,64);
@@ -42,7 +46,7 @@ exports.postReply = function(req, res, next) {
   // check the validation object for errors
   var errors = req.validationErrors();
 
-  console.log(errors);
+  if (errors) console.log(errors);
 
   if (errors) {
     res.render('index', {
@@ -54,22 +58,29 @@ exports.postReply = function(req, res, next) {
   }
   else {
 
-    // Define what to save according to the Replies Schema
-    var newReply = new Reply({
-      comment: comment
-    });
-
-    // Dynamically add name
-    if (name != '') {
-      newReply.add({name: name});
+    // Dynamically add name, comment, and subject
+    if (name == '') {
+      name = 'Anonymous';
     }
 
-    newReply.save(function(err) {
-      if (err) {
-        console.log(err);
-        return next(err);
+    Post.findByIdAndUpdate(postId, {$push: {"replies": {comment: comment, name: name} } }, {safe: true, upsert: true},
+      function(err, model) {
+        if (err) console.log(err);
+        console.log(model.replies);
+        res.redirect("back");
       }
-    });
-    res.redirect("back");
+    );
+
+/*
+    Post.findById(postId, function (err, post) {
+      if (err) console.log(err);
+
+      console.log("We're in!");
+
+      post.update({}, { $push: { replies: { name: name, comment: comment } } }, { upsert: true }).exec();
+
+      console.log(post.replies);
+      res.redirect("back");
+    });*/
   }
 };

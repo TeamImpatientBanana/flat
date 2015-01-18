@@ -13,7 +13,8 @@ block content
 
     .container-fluid.text-center(id="form")
       p
-        form
+        form(action="/reply", method="post", enctype="multipart/form-data")
+          input(type="hidden", name="postId", id="postId", value=postData._id)
           .form-group
             label.sr-only(for="comment")
             textarea.form-control(id="comment", name="comment", placeholder="Comment", required)
@@ -26,10 +27,12 @@ block content
 
     // Begin thread content
     .container-fluid
-       .container-fluid.OPReply
-          b $postnumber $Name $file
-          p $comment
-       .container-fluid.reply
-          b $postnumber $Name
-          p $comment
+      .container-fluid.OPReply
+        b #{postData._id} &nbsp&nbsp;&nbsp;&nbsp; #{postData.name} &nbsp;&nbsp;&nbsp;&nbsp; #{postData.fileName}
+        p= postData.comment
+      unless postData.replies == null
+        each reply in postData.replies
+          .container-fluid.reply
+            b #{reply.dateReplied} &nbsp;&nbsp;&nbsp;&nbsp; #{reply.name}
+            p #{reply.comment}
     // End thread content

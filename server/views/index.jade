@@ -70,8 +70,8 @@ block content
             td= post._id
             td= post.name
             td
-              - var link = "/uploads/" + post.fileName;
-              a(target="_blank", href=link) #{post.fileName}
+              - var fileLink = "/uploads/" + post.fileName;
+              a(target="_blank", href=fileLink) #{post.fileName}
             td= post.tag
             td= post.subject
             - var newSize = post.fileSize
@@ -87,5 +87,6 @@ block content
               td #{newSize}MB
             td= post.datePosted
             td
-              | Replies
+              - var replyLink = "/reply/" + post._id;
+              a(target="_blank", href=replyLink) Replies
   // End board content

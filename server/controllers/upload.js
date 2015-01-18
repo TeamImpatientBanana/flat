@@ -6,7 +6,6 @@ var fs = require('fs');
 var mongoose = require('mongoose');
 var validator = require('express-validator');
 var Post = require('../models/Posts');
-var Reply = require('../models/Replies');
 
 /**
  * POST /upload
@@ -83,7 +82,7 @@ exports.postUpload = function(req, res, next) {
             fs.writeFile(filePath, data, function (err) {
               if (err) return next(err);
 
-              // Dynamically add name, comment, and subject
+              // Dynamically add name
               if (name == '') {
                 name = 'Anonymous';
               }

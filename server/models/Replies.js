@@ -5,20 +5,22 @@ var mongoose = require('mongoose')
   , Schema = mongoose.Schema;
 
 // Define schema
-var Replies = new Schema({
-  comment : String,
+var repliesSchema = new Schema({
+  comment : {
+    type: String,
+    ref: 'Posts'
+  },
   name : {
     type: String,
-    default: 'Anonymous'
+    default: 'Anonymous',
+    ref: 'Posts'
   },
   dateReplied : {
     type: Date,
     default: Date.now
-  },
-  postId: {
-    type: Schema.Types.ObjectId,
-    ref: 'Posts'
   }
-}, {collection: 'replies'});
+});
 
-module.exports = mongoose.model('Replies', Replies);
+// Third argument would be the collection name
+var Replies = mongoose.model('Replies', repliesSchema);
+module.exports = Replies;
