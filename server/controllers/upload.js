@@ -7,6 +7,20 @@ var mongoose = require('mongoose');
 var validator = require('express-validator');
 var Post = require('../models/Posts');
 
+
+exports.getUpload = function(req, res) {
+  var postId = req.params.id;
+
+  Post
+    .findById(postId)
+    .select('filePath')
+    .exec(function(err, postData){
+      if (err) console.log(err);
+      res.sendFile(postData.filePath, {root: "./"});
+    });
+};
+
+
 /**
  * POST /upload
  * Upload
@@ -77,6 +91,16 @@ exports.postUpload = function(req, res, next) {
           fs.readFile(req.files.file.path, function (err, data) {
             if (err) console.log(err);
 
+            var webmPatt = new RegExp("/.webm$/");
+
+            // Check if webm file
+            if (webmPatt.test(fileName)) {
+
+              console.log("It's a webm file");
+              console.log(req.files.file.path.toString('base64'));
+
+            }
+
             filePath = "./public/uploads/" + fileName;
 
             fs.writeFile(filePath, data, function (err) {
@@ -94,7 +118,8 @@ exports.postUpload = function(req, res, next) {
                 subject: subject,
                 fileName: fileName,
                 tag: tag,
-                fileSize: fileSize
+                fileSize: fileSize,
+                filePath: filePath
               });
 
               newPost.save(function(err) {
