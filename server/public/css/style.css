@@ -100,5 +100,46 @@ h2 {
 }
 .headerimage {
     width: 100px;
+    margin: 10px;
+}
+/*-------------------------------------------------- */
+
+/* fixes for the table
+-------------------------------------------------- */
+td {
+    max-width: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+table {
+    table-layout:fixed;
+}
+/*-------------------------------------------------- */
+
+/* media queries for the table
+-------------------------------------------------- */
+/*No.*/
+td:nth-child(1),
+th:nth-child(1){
+  display: none;
+}
+@media (min-width: 1200px) {
+    td:nth-child(1),
+    th:nth-child(1){
+      display: table-cell;
+    }
+}
+
+/*Name*/
+td:nth-child(2),
+th:nth-child(2){
+  display: none;
+}
+@media (min-width: 768px) {
+    td:nth-child(2),
+    th:nth-child(2){
+      display: table-cell;
+    }
 }
 /*-------------------------------------------------- */
