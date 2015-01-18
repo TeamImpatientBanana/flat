@@ -78,6 +78,23 @@ exports.postUpload = function(req, res, next) {
           });
         }
         else {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           // Read file and store it in a new path
           fs.readFile(req.files.file.path, function (err, data) {
             if (err) console.log(err);

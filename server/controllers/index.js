@@ -1,6 +1,7 @@
 var bodyParser = require('body-parser');
 var Post = require('../models/Posts');
 var fs = require('fs');
+var Post = require('../models/Posts');
 
 
 /**
@@ -9,6 +10,7 @@ var fs = require('fs');
  */
 
 exports.index = function(req, res) {
+
 
 
 
