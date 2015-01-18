@@ -6,8 +6,19 @@ var mongoose = require('mongoose')
 
 // Define schema
 var Replies = new Schema({
-  replyNumber : Number,
-  text : String
+  comment : String,
+  name : {
+    type: String,
+    default: 'Anonymous'
+  },
+  dateReplied : {
+    type: Date,
+    default: Date.now
+  },
+  postId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Posts'
+  }
 }, {collection: 'replies'});
 
 module.exports = mongoose.model('Replies', Replies);

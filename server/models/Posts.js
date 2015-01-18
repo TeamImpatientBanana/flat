@@ -4,7 +4,7 @@
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema;
 
-var Post = new Schema({
+var Posts = new Schema({
 
     //postid: { type: Number, default: 1 },
     name : {
@@ -22,7 +22,11 @@ var Post = new Schema({
     datePosted : {
         type: Date,
         default: Date.now
-    }
+    },
+    _replies: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Replies'
+    }]
 }, {collection: 'posts'});
 
 /*
@@ -39,4 +43,4 @@ Post.pre('save', function(next) {
 */
 
 // Third argument would be the collection name
-module.exports = mongoose.model('Post', Post);
+module.exports = mongoose.model('Posts', Posts);

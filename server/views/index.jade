@@ -48,31 +48,32 @@ block content
     table.table.table-striped.text-center
       thead
         tr
-          th
+          th.text-center
             | No.
-          th
+          th.text-center
             | Name
-          th
+          th.text-center
             | File
-          th
+          th.text-center
             | Tag
-          th
+          th.text-center
             | Subject
-          th
+          th.text-center
             | Size
-          th
+          th.text-center
             | Date
-          th
+          th.text-center
             | Replies
       tbody.text-center
         each post in posts
           tr.text-center
             td= post._id
             td= post.name
-            td= post.fileName
+            td
+              - var link = "/uploads/" + post.fileName;
+              a(target="_blank", href=link) #{post.fileName}
             td= post.tag
             td= post.subject
-
             - var newSize = post.fileSize
             if (newSize < 1024)
               td #{newSize}B
@@ -84,7 +85,6 @@ block content
               - newSize = (newSize / 1024) / 1024
               - newSize = newSize.toString().substr(0,4);
               td #{newSize}MB
-            td= post.fileSize
             td= post.datePosted
             td
               | Replies

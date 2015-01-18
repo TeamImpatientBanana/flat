@@ -6,6 +6,7 @@ var fs = require('fs');
 var mongoose = require('mongoose');
 var validator = require('express-validator');
 var Post = require('../models/Posts');
+var Reply = require('../models/Replies');
 
 /**
  * POST /upload
@@ -22,19 +23,13 @@ exports.postUpload = function(req, res, next) {
   var subject = req.body.subject;
   var comment = req.body.comment;
 
-  console.log(fileSize);
-
   // validate the inputs
-  //req.assert('name', 'Name is required.').notEmpty();
-  req.assert('name', 'That name is too long.').len(0,32);
-  //req.assert('file', 'You gotta upload a file!').notEmpty();
-  req.assert('comment', 'Your comment is waaaaay too long.').len(0,100);
+  req.assert('name', 'That name is too long.').len(0,64);
+  req.assert('comment', 'Your comment is waaaaay too long.').len(0,300);
   req.assert('subject', 'Your subject is waaaaay too long.').len(0,64);
 
   // check the validation object for errors
   var errors = req.validationErrors();
-
-  console.log(errors);
 
   if (errors) {
     res.render('index', {
@@ -85,49 +80,31 @@ exports.postUpload = function(req, res, next) {
 
             filePath = "./public/uploads/" + fileName;
 
-            console.log(fileName);
-            console.log(filePath);
-            console.log(fileSize);
-
             fs.writeFile(filePath, data, function (err) {
               if (err) return next(err);
 
-              // Define what to save according to the Post Schema
+              // Dynamically add name, comment, and subject
+              if (name == '') {
+                name = 'Anonymous';
+              }
+
+              // Define what to save according to the Posts Schema
               var newPost = new Post({
-                //name: name,
-                //comment: comment,
+                name: name,
+                comment: comment,
+                subject: subject,
                 fileName: fileName,
                 tag: tag,
-                //subject: subject,
                 fileSize: fileSize
               });
 
-              // Dynamically add name, comment, and subject
-              if (name != '') {
-                newPost.add({name: name});
-              }
-              if (comment != '') {
-                newPost.add({comment: comment});
-              }
-              if (subject != '') {
-                newPost.add({subject: subject});
-              }
-
-              console.log("oy");
-              console.log(newPost);
-
               newPost.save(function(err) {
-                console.log("yo");
                 if (err) {
                   console.log(err);
                   return next(err);
                 }
-                console.log("Saved post");
-
               });
-
               res.redirect("back");
-
             });
           });
         }

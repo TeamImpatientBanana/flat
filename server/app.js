@@ -32,6 +32,7 @@ var indexController = require('./controllers/index');
 var uploadController = require('./controllers/upload');
 var contactController = require('./controllers/contact');
 var testController = require('./controllers/test');
+var replyController = require('./controllers/reply');
 
 
 /**
@@ -113,6 +114,12 @@ app.use(function(req, res, next) {
 });
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
 
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next();
+});
+
 
 /**
  * Main routes.
@@ -120,12 +127,11 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
 
 app.get('/', indexController.index);
 app.post('/upload', uploadController.postUpload);
-//app.post('/reply', indexController.postReply);
-app.get('/reply', indexController.getReply);
+app.get('/reply/:id', replyController.getReply);
+app.post('/reply', replyController.postReply);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 app.get('/test', testController.index);
-
 
 /**
  * 500 Error Handler.

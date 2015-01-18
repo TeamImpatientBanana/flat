@@ -8,12 +8,12 @@ block content
         button.btn.btn-primary(type="button", id="button")
           | Comment
 
+    // Validation error message partial
+    include partials/messages
+
     .container-fluid.text-center(id="form")
       p
         form
-          .form-group.displaynone
-            label(for="currentThread")
-            input(id="currentThread", name="currentThread", value=$currentThread)
           .form-group
             label.sr-only(for="comment")
             textarea.form-control(id="comment", name="comment", placeholder="Comment", required)

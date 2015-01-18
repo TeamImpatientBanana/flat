@@ -31,9 +31,3 @@ exports.index = function(req, res) {
 
 
 };
-
-exports.getReply = function(req, res) {
-  res.render('reply', {
-    title: 'Reply'
-  });
-};
