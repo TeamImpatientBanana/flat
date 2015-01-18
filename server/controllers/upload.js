@@ -11,15 +11,19 @@ var Post = require('../models/Posts');
 exports.getUpload = function(req, res) {
   var postId = req.params.id;
 
-  Post
-    .findById(postId)
-    .select('filePath')
-    .exec(function(err, postData){
-      if (err) console.log(err);
-      res.sendFile(postData.filePath, {root: "./"});
-    });
+  if (postId != null) {
+    Post
+      .findById(postId)
+      .exec(function (err, postData) {
+        if (err) console.log(err);
+        console.log(postData);
+        res.sendFile(postData.filePath, {root: "./"});
+      });
+  }
+  else {
+    res.status(200).send("Please give a post ID!")
+  }
 };
-
 
 /**
  * POST /upload
