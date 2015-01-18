@@ -19,6 +19,7 @@ var postsSchema = new Schema({
     },
     subject : String,
     fileSize : Number,
+    filePath : String,
     datePosted : {
         type: Date,
         default: Date.now

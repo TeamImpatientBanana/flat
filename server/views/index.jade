@@ -70,7 +70,7 @@ block content
             td= post._id
             td= post.name
             td
-              - var fileLink = "/uploads/" + post.fileName;
+              - var fileLink = "/" + post._id;
               a(target="_blank", href=fileLink) #{post.fileName}
             td= post.tag
             td= post.subject

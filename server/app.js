@@ -127,6 +127,7 @@ app.use(function(req, res, next) {
 
 app.get('/', indexController.index);
 app.post('/upload', uploadController.postUpload);
+app.get('/:id', uploadController.getUpload);
 app.get('/reply/:id', replyController.getReply);
 app.post('/reply', replyController.postReply);
 app.get('/contact', contactController.getContact);
