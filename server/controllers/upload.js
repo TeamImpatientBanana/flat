@@ -2,16 +2,15 @@
  * Created by Andrew on 1/17/2015.
  */
 var bodyParser = require('body-parser');
-var Post = require('../models/Posts');
 var fs = require('fs');
 var mongoose = require('mongoose');
 var validator = require('express-validator');
+var Post = require('../models/Posts');
 
 /**
  * POST /upload
  * Upload
  */
-
 
 exports.postUpload = function(req, res, next) {
 
@@ -21,11 +20,12 @@ exports.postUpload = function(req, res, next) {
   var tag = req.body.tag;
   var name = req.body.name;
   var subject = req.body.subject;
+  var comment = req.body.comment;
 
   console.log(fileSize);
 
   // validate the inputs
-  req.assert('name', 'Name is required.').notEmpty();
+  //req.assert('name', 'Name is required.').notEmpty();
   req.assert('name', 'That name is too long.').len(0,32);
   //req.assert('file', 'You gotta upload a file!').notEmpty();
   req.assert('comment', 'Your comment is waaaaay too long.').len(0,100);
@@ -64,10 +64,10 @@ exports.postUpload = function(req, res, next) {
       }
       else {
         // Check if filesize is over 20 MB
-        if (fileSize > 20971520) {
+        if (fileSize > 52428800) {
           errors = [
             {
-              msg: 'Your file must be under 20 MB'
+              msg: 'Your file must be under 50 MB'
             }
           ];
           res.render('index', {
@@ -78,22 +78,6 @@ exports.postUpload = function(req, res, next) {
           });
         }
         else {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
           // Read file and store it in a new path
           fs.readFile(req.files.file.path, function (err, data) {
@@ -110,12 +94,24 @@ exports.postUpload = function(req, res, next) {
 
               // Define what to save according to the Post Schema
               var newPost = new Post({
-                name: name,
+                //name: name,
+                //comment: comment,
                 fileName: fileName,
                 tag: tag,
-                subject: subject,
-                size: fileSize
+                //subject: subject,
+                fileSize: fileSize
               });
+
+              // Dynamically add name, comment, and subject
+              if (name != '') {
+                newPost.add({name: name});
+              }
+              if (comment != '') {
+                newPost.add({comment: comment});
+              }
+              if (subject != '') {
+                newPost.add({subject: subject});
+              }
 
               console.log("oy");
               console.log(newPost);
@@ -130,7 +126,7 @@ exports.postUpload = function(req, res, next) {
 
               });
 
-              //res.redirect("back");
+              res.redirect("back");
 
             });
           });

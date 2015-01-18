@@ -38,11 +38,14 @@ getHtmlPage = function (link, callback) {
       var scripts = $('script');
       for (var i = 0; i < scripts.length; i+=1) {
         var scriptTag = $(scripts[i]);
-        script_src = scriptTag.attr().src;
+        var script_src = scriptTag.attr().src;
         if (script_src) {
           script_src = url.resolve(link, script_src);
-          var linkContents = "console.log(33)" ; // fs.readlinkSync(script_src)
-          scriptTag.html(linkContents).removeAttr('src');
+          request.get(script_src).on('response', function(response) {
+            scriptTag.html(response).removeAttr('src');
+            return scriptTag;
+          });
+
         }
         //$(scripts[i]).replaceWith(scriptTag);
       }

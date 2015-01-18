@@ -1,43 +1,42 @@
 /**
  * Created by Andrew on 1/17/2015.
  */
-
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema;
 
+var Post = new Schema({
 
-function subjectValidator(v) {
-    return v.length < 64;
-}
-
-// Define schema
-var Replies = new Schema({
-    replyNumber : Number,
-    text : String
-});
-
-var PostSchema = new Schema({
+    //postid: { type: Number, default: 1 },
     name : {
         type: String,
-        required: true
+        default: 'Anonymous'
     },
     comment : String,
     fileName : String,
     tag : {
         type: String,
-        enum: ['video', 'game', 'loop'],
-        required: true
+        enum: ['video', 'game', 'loop']
     },
-    subject : {
-        type: String,
-        validate: [subjectValidator, 'Your subject must be less than 64 characters']
-    },
-    size : Number,
+    subject : String,
+    fileSize : Number,
     datePosted : {
         type: Date,
         default: Date.now
     }
-
 }, {collection: 'posts'});
-// Third argument in the collection name
-module.exports = mongoose.model('Index', PostSchema);
+
+/*
+Post.pre('save', function(next) {
+    var doc = this;
+    // You have to know the settings_id, for me, I store it in memory: app.current.settings.id
+    Post.findByIdAndUpdate( post_id, { $inc: { postNumber: 1 } }, function (err, settings) {
+        if (err) next(err);
+        doc.number = settings.postNumber - 1; // subtract 1 because I need the 'current' sequence number, not the next
+        next();
+    });
+});
+
+*/
+
+// Third argument would be the collection name
+module.exports = mongoose.model('Post', Post);

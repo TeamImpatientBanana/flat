@@ -65,21 +65,27 @@ block content
           th
             | Replies
       tbody.text-center
-        tr.text-center
-          td
-            | No.
-          td
-            | Name
-          td
-            | File
-          td
-            | Tag
-          td
-            | Subject
-          td
-            | Size
-          td
-            | Date
-          td
-            | Replies
+        each post in posts
+          tr.text-center
+            td= post._id
+            td= post.name
+            td= post.fileName
+            td= post.tag
+            td= post.subject
+
+            - var newSize = post.fileSize
+            if (newSize < 1024)
+              td #{newSize}B
+            if (newSize > 1024 && newSize < 1048576)
+              - newSize = newSize / 1024;
+              - newSize = newSize.toString().substr(0,4);
+              td #{newSize}KB
+            else
+              - newSize = (newSize / 1024) / 1024
+              - newSize = newSize.toString().substr(0,4);
+              td #{newSize}MB
+            td= post.fileSize
+            td= post.datePosted
+            td
+              | Replies
   // End board content
