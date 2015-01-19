@@ -6,7 +6,7 @@ var fs = require('fs');
 var mongoose = require('mongoose');
 var validator = require('express-validator');
 var Post = require('../models/Posts');
-
+var path = require('path');
 
 exports.getUpload = function(req, res) {
   var postId = req.params.id;
@@ -17,7 +17,7 @@ exports.getUpload = function(req, res) {
       .exec(function (err, postData) {
         if (err) console.log(err);
         console.log(postData);
-        res.sendFile(postData.filePath, {root: "./"});
+        res.sendFile(postData.filePath);
       });
   }
   else {
@@ -105,7 +105,7 @@ exports.postUpload = function(req, res, next) {
 
             }
 
-            filePath = "./public/uploads/" + fileName;
+            filePath = path.resolve(__dirname, '../public/uploads') + fileName;
 
             fs.writeFile(filePath, data, function (err) {
               if (err) return next(err);
