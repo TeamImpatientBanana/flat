@@ -24,19 +24,7 @@ exports.getUpload = function(req, res) {
       .findById(postId)
       .exec(function (err, postData) {
         if (err) console.log(err);
-
-        if (postData.filePath != null) {
-          if (postData.filePath.indexOf("uploads/") > -1) {
-            res.sendFile(postData.fileName, {root: path.resolve(__dirname, "../public/uploads")});
-          }
-          else {
-            res.sendFile(postData.filePath, {root: "/"});
-          }
-        }
-        else {
-          res.sendFile(postData.filePath, {root: "/"});
-        }
-
+        res.sendFile(postData.fileName, {root: path.resolve(__dirname, "../public/uploads")});
       });
   }
   else {
