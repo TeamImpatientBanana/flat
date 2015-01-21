@@ -8,8 +8,10 @@ var fs = require('fs');
 var validator = require('express-validator');
 
 
-
-
+/**
+ * GET /reply/:id
+ *
+ */
 
 exports.getReply = function(req, res) {
 
@@ -30,6 +32,12 @@ exports.getReply = function(req, res) {
     });
 
 };
+
+
+/**
+ * POST /reply
+ *
+ */
 
 exports.postReply = function(req, res) {
 
@@ -70,17 +78,5 @@ exports.postReply = function(req, res) {
         res.redirect("back");
       }
     );
-
-/*
-    Post.findById(postId, function (err, post) {
-      if (err) console.log(err);
-
-      console.log("We're in!");
-
-      post.update({}, { $push: { replies: { name: name, comment: comment } } }, { upsert: true }).exec();
-
-      console.log(post.replies);
-      res.redirect("back");
-    });*/
   }
 };

@@ -6,11 +6,12 @@ var fs = require('fs');
 
 /**
  * GET /
- * Home page.
+ * Home page
  */
 
 exports.index = function(req, res) {
 
+  // Find the top 20 posts and sort them by most recently posted
   Post
     .find({})
     .sort('-datePosted')
@@ -21,7 +22,7 @@ exports.index = function(req, res) {
 
       console.log(postsData);
 
-
+      // Send postsData as a JSON object for our view to do fun things with
       res.render('index', {
         title: 'Home',
         posts: postsData

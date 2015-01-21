@@ -8,6 +8,12 @@ var validator = require('express-validator');
 var Post = require('../models/Posts');
 var path = require('path');
 
+
+/**
+ * GET /upload/:id
+ * Get uploads by their id
+ */
+
 exports.getUpload = function(req, res) {
   var postId = req.params.id;
 
@@ -21,13 +27,14 @@ exports.getUpload = function(req, res) {
       });
   }
   else {
-    res.status(200).send("Please give a post ID!")
+    res.send("Please give a post ID!")
   }
 };
 
+
 /**
  * POST /upload
- * Upload
+ * File Upload
  */
 
 exports.postUpload = function(req, res, next) {
@@ -95,22 +102,13 @@ exports.postUpload = function(req, res, next) {
           fs.readFile(req.files.file.path, function (err, data) {
             if (err) console.log(err);
 
-            var webmPatt = new RegExp("/.webm$/");
-
-            // Check if webm file
-            if (webmPatt.test(fileName)) {
-
-              console.log("It's a webm file");
-              console.log(req.files.file.path.toString('base64'));
-
-            }
-
+            // __dirname is the directory of the executing script, not of app.js!
             filePath = path.resolve(__dirname, '../public/uploads') + fileName;
 
             fs.writeFile(filePath, data, function (err) {
               if (err) return next(err);
 
-              // Dynamically add name
+              // If a name isn't entered, the name will be anonymous
               if (name == '') {
                 name = 'Anonymous';
               }
