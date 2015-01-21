@@ -14,22 +14,11 @@
  *
  * If you have already commited this file to GitHub with your keys, then
  * refer to https://help.github.com/articles/remove-sensitive-data
-*/
+ */
 
 module.exports = {
 
   db: process.env.MONGOLAB_URI || process.env.MONGODB || 'mongodb://localhost:27017/flat',
 
-  sessionSecret: process.env.SESSION_SECRET || 'Your Session Secret goes here',
-
-
-  mandrill: {
-    user: process.env.MANDRILL_USER || 'hackathonstarterdemo',
-    password: process.env.MANDRILL_PASSWORD || 'E1K950_ydLR4mHw12a0ldA'
-  },
-
-  sendgrid: {
-    user: process.env.SENDGRID_USER || 'hslogin',
-    password: process.env.SENDGRID_PASSWORD || 'hspassword00'
-  }
+  sessionSecret: process.env.SESSION_SECRET || 'Your Session Secret goes here'
 };

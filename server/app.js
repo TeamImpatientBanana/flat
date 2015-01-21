@@ -30,7 +30,6 @@ var connectAssets = require('connect-assets');
 
 var indexController = require('./controllers/index');
 var uploadController = require('./controllers/upload');
-var contactController = require('./controllers/contact');
 var testController = require('./controllers/test');
 var replyController = require('./controllers/reply');
 
@@ -130,8 +129,6 @@ app.post('/upload', uploadController.postUpload);
 app.get('/upload/:id', uploadController.getUpload);
 app.get('/reply/:id', replyController.getReply);
 app.post('/reply', replyController.postReply);
-app.get('/contact', contactController.getContact);
-app.post('/contact', contactController.postContact);
 app.get('/test', testController.index);
 
 /**
