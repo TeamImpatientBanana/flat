@@ -17,13 +17,19 @@ var path = require('path');
 exports.getUpload = function(req, res) {
   var postId = req.params.id;
 
-  if (postId != null) {
+  // Check if an id was passed as a parameter
+  if (postId) {
     Post
       .findById(postId)
       .exec(function (err, postData) {
         if (err) console.log(err);
-        console.log(postData);
-        res.sendFile(postData.filePath);
+        console.log("Index:");
+        if (postData.filePath.indexOf("uploads/") > -1) {
+          res.sendFile(postData.fileName, {root: path.resolve(__dirname, "../public/uploads")});
+        }
+        else {
+          res.sendFile(postData.filePath, {root: "/"});
+        }
       });
   }
   else {
@@ -103,7 +109,8 @@ exports.postUpload = function(req, res, next) {
             if (err) console.log(err);
 
             // __dirname is the directory of the executing script, not of app.js!
-            filePath = path.resolve(__dirname, '../public/uploads') + fileName;
+            filePath = path.resolve(__dirname, '../public/uploads') + "/" + fileName;
+            console.log(filePath);
 
             fs.writeFile(filePath, data, function (err) {
               if (err) return next(err);
@@ -120,8 +127,7 @@ exports.postUpload = function(req, res, next) {
                 subject: subject,
                 fileName: fileName,
                 tag: tag,
-                fileSize: fileSize,
-                filePath: filePath
+                fileSize: fileSize
               });
 
               newPost.save(function(err) {

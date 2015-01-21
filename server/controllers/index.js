@@ -16,11 +16,9 @@ exports.index = function(req, res) {
     .find({})
     .sort('-datePosted')
     .limit(20)
-    .select('_id name fileName tag subject fileSize datePosted')
+    //.select('_id name fileName tag subject fileSize datePosted')
     .exec(function(err, postsData) {
       if (err) eventHandle(err);
-
-      console.log(postsData);
 
       // Send postsData as a JSON object for our view to do fun things with
       res.render('index', {

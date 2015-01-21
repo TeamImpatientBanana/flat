@@ -1,3 +1,6 @@
+//
+  Rendered from index.js
+
 extends layout
 
 block content
@@ -87,6 +90,7 @@ block content
               td #{newSize}MB
             td= post.datePosted
             td
+              - var repliesCount = post.replies.length;
               - var replyLink = "/reply/" + post._id;
-              a(target="_blank", href=replyLink) Replies
+              a(href=replyLink)= repliesCount
   // End board content
