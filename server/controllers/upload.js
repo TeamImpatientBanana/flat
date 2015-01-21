@@ -19,17 +19,24 @@ exports.getUpload = function(req, res) {
 
   // Check if an id was passed as a parameter
   if (postId) {
+
     Post
       .findById(postId)
       .exec(function (err, postData) {
         if (err) console.log(err);
-        console.log("Index:");
-        if (postData.filePath.indexOf("uploads/") > -1) {
-          res.sendFile(postData.fileName, {root: path.resolve(__dirname, "../public/uploads")});
+
+        if (postData.filePath) {
+          if (postData.filePath.indexOf("uploads/") > -1) {
+            res.sendFile(postData.fileName, {root: path.resolve(__dirname, "../public/uploads")});
+          }
+          else {
+            res.sendFile(postData.filePath, {root: "/"});
+          }
         }
         else {
           res.sendFile(postData.filePath, {root: "/"});
         }
+
       });
   }
   else {
