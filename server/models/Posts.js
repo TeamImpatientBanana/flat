@@ -15,7 +15,7 @@ var postsSchema = new Schema({
     fileName : String,
     tag : {
         type: String,
-        enum: ['video', 'game', 'loop']
+        enum: ['video', 'game', 'loop', 'other']
     },
     subject : String,
     fileSize : Number,

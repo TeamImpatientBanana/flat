@@ -68,7 +68,6 @@ exports.postUpload = function(req, res, next) {
 
     // Check for duplicate filename
     Post.count({fileName: fileName}, function( err, count){
-      console.log( "Number of users:", count );
       if (count != 0) {
         errors = [
           {

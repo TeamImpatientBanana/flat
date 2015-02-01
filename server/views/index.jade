@@ -29,7 +29,7 @@ block content
         .form-group
           .radio
             label.sr-only(for="game")
-            input(type="radio", name="tag", value="game", checked)
+            input(type="radio", name="tag", value="game")
             | Game
           .radio
             label.sr-only(for="video")
@@ -39,9 +39,13 @@ block content
             label.sr-only(for="loop")
             input(type="radio", name="tag", value="loop")
             | Loop
+          .radio
+            label.sr-only(for="other")
+            input(type="radio", name="tag", value="other")
+            | Other
         .form-group
           label.sr-only(for="name")
-          input.form-control(id="name", name="name", placeholder="Name, optional")
+          input.form-control(id="name", name="name", placeholder="Name (Optional)")
         button.btn.btn-default(type="submit")
           | Submit
   // End post button

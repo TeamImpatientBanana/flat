@@ -31,7 +31,13 @@ block content
     // Begin thread content
     .container-fluid
       .container-fluid.OPReply
-        b #{postData._id} &nbsp&nbsp;&nbsp;&nbsp; #{postData.name} &nbsp;&nbsp;&nbsp;&nbsp; #{postData.fileName}
+        b
+          - var fileLink = "/upload/" + postData._id;
+          a(href=fileLink, target="_blank") #{postData._id}
+          | &nbsp&nbsp;&nbsp;&nbsp;
+          | #{postData.name}
+          | &nbsp;&nbsp;&nbsp;&nbsp;
+          | #{postData.fileName}
         p= postData.comment
       unless postData.replies == null
         each reply in postData.replies
