@@ -7,10 +7,6 @@ Share and commment on files instantly; upload games, videos, and more. Stay anon
 
 /f/lat was built with Node.js and Bootstrap.
 
-##To use
-
-Visit http://flat.impatientbanana.com/ .
-
 ##Status
 
 Done! No more development is being done and no more features are being added. Feel free to make feature and bug requests, but don't expect them to get done. Feel free to make pull requests.
